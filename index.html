@@ -7,23 +7,24 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0f1410;
-    --surface: #161d17;
-    --surface2: #1d2620;
-    --surface3: #243028;
-    --border: #2e3d30;
-    --accent: #7ec87a;
-    --accent2: #4a9e45;
-    --accent-dim: rgba(126,200,122,0.12);
-    --accent-glow: rgba(126,200,122,0.06);
-    --text: #e8f0e8;
-    --text-dim: #8fa48f;
-    --text-muted: #536653;
-    --red: #e07070;
-    --amber: #d4a85a;
+    --bg: #f0f2f4;
+    --surface: #ffffff;
+    --surface2: #f5f6f8;
+    --surface3: #eceef1;
+    --border: #dde1e7;
+    --accent: #2e7d32;
+    --accent2: #43a047;
+    --accent-dim: rgba(46,125,50,0.08);
+    --text: #1a1e23;
+    --text-dim: #4a5568;
+    --text-muted: #8a96a3;
+    --red: #c0392b;
+    --amber: #b7791f;
     --mono: 'DM Mono', monospace;
     --sans: 'DM Sans', sans-serif;
     --radius: 10px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,48 +34,48 @@
     color: var(--text);
     font-family: var(--sans);
     min-height: 100vh;
-    padding: 0;
   }
 
   /* ── HEADER ── */
   .header {
     background: var(--surface);
     border-bottom: 1px solid var(--border);
-    padding: 18px 24px;
+    padding: 16px 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: sticky;
     top: 0;
     z-index: 100;
+    box-shadow: var(--shadow);
   }
   .header-left { display: flex; align-items: center; gap: 12px; }
   .logo-dot {
     width: 10px; height: 10px;
     background: var(--accent);
     border-radius: 50%;
-    box-shadow: 0 0 10px var(--accent);
+    box-shadow: 0 0 0 3px rgba(46,125,50,0.15);
     animation: pulse 2.5s ease-in-out infinite;
   }
   @keyframes pulse {
-    0%,100% { opacity: 1; box-shadow: 0 0 10px var(--accent); }
-    50% { opacity: 0.6; box-shadow: 0 0 4px var(--accent); }
+    0%,100% { box-shadow: 0 0 0 3px rgba(46,125,50,0.15); }
+    50% { box-shadow: 0 0 0 5px rgba(46,125,50,0.05); }
   }
   .header h1 {
     font-family: var(--mono);
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
     letter-spacing: 0.08em;
     color: var(--text);
     text-transform: uppercase;
   }
-  .header-actions { display: flex; gap: 10px; }
+  .header-actions { display: flex; gap: 8px; }
   .btn {
     font-family: var(--mono);
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.06em;
-    padding: 9px 16px;
+    padding: 8px 14px;
     border-radius: 6px;
     border: 1px solid var(--border);
     cursor: pointer;
@@ -82,42 +83,65 @@
     text-transform: uppercase;
   }
   .btn-ghost {
-    background: transparent;
+    background: var(--surface2);
     color: var(--text-dim);
   }
-  .btn-ghost:hover { background: var(--surface2); color: var(--text); border-color: var(--text-muted); }
+  .btn-ghost:hover { background: var(--surface3); color: var(--text); }
   .btn-primary {
     background: var(--accent);
-    color: #0a1009;
+    color: #fff;
     border-color: var(--accent);
     font-weight: 600;
   }
-  .btn-primary:hover { background: #92d98e; }
+  .btn-primary:hover { background: #1b5e20; }
+  .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
   .btn-danger {
-    background: transparent;
+    background: var(--surface2);
     color: var(--red);
-    border-color: rgba(224,112,112,0.3);
+    border-color: #f5c6c2;
   }
-  .btn-danger:hover { background: rgba(224,112,112,0.1); }
+  .btn-danger:hover { background: #fdf0ef; }
 
   /* ── MAIN ── */
-  .main { padding: 28px 24px; max-width: 900px; margin: 0 auto; }
+  .main { padding: 24px; max-width: 920px; margin: 0 auto; }
 
-  /* ── META SECTION ── */
-  .meta-card {
+  /* ── PROGRESS ── */
+  .progress-bar {
+    background: var(--border);
+    border-radius: 3px;
+    height: 3px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent2), var(--accent));
+    border-radius: 3px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  /* ── CARDS ── */
+  .card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+  }
+
+  /* ── META SECTION ── */
+  .meta-card {
     padding: 20px;
-    margin-bottom: 24px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 16px;
   }
-  .field-group { display: flex; flex-direction: column; gap: 6px; }
+
+  .field-group { display: flex; flex-direction: column; gap: 5px; }
   .field-label {
     font-family: var(--mono);
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -130,16 +154,17 @@
     color: var(--text);
     font-family: var(--mono);
     font-size: 14px;
-    padding: 10px 12px;
+    padding: 9px 12px;
     width: 100%;
     appearance: none;
     -webkit-appearance: none;
     outline: none;
-    transition: border-color 0.15s;
+    transition: all 0.15s;
   }
   .field-input:focus, .field-select:focus {
     border-color: var(--accent2);
-    background: var(--surface3);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(46,125,50,0.1);
   }
   .select-wrap { position: relative; }
   .select-wrap::after {
@@ -150,94 +175,96 @@
     transform: translateY(-50%);
     color: var(--text-muted);
     pointer-events: none;
-    font-size: 13px;
+    font-size: 12px;
+  }
+  .unit-hint {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-top: 2px;
   }
 
-  /* ── ROOM ENV SECTION ── */
-  .section-header {
+  /* ── SECTION HEADERS ── */
+  .card-header {
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface2);
+    border-radius: var(--radius) var(--radius) 0 0;
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 14px;
   }
   .section-tag {
     font-family: var(--mono);
     font-size: 10px;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--accent);
     background: var(--accent-dim);
-    border: 1px solid rgba(126,200,122,0.2);
-    padding: 3px 9px;
+    border: 1px solid rgba(46,125,50,0.2);
+    padding: 2px 8px;
     border-radius: 4px;
   }
   .section-title {
     font-family: var(--mono);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
     color: var(--text-dim);
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
   }
 
-  .env-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-    margin-bottom: 24px;
+  /* ── ENV CARD ── */
+  .env-grid {
+    padding: 18px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
   }
 
-  /* ── TABLE CARD ── */
+  /* ── TABLE CARDS ── */
   .table-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+    margin-bottom: 14px;
     overflow: hidden;
   }
   .table-card-header {
     background: var(--surface2);
     border-bottom: 1px solid var(--border);
-    padding: 12px 18px;
+    padding: 10px 16px;
     display: flex;
     align-items: center;
     gap: 10px;
   }
   .table-badge {
     font-family: var(--mono);
-    font-size: 12px;
-    font-weight: 500;
+    font-size: 11px;
+    font-weight: 600;
     letter-spacing: 0.08em;
     color: var(--accent);
     background: var(--accent-dim);
-    border: 1px solid rgba(126,200,122,0.25);
-    padding: 4px 10px;
-    border-radius: 5px;
+    border: 1px solid rgba(46,125,50,0.2);
+    padding: 3px 10px;
+    border-radius: 4px;
     text-transform: uppercase;
   }
   .table-card-body {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0;
   }
-  .side-section {
-    padding: 16px 18px;
-  }
-  .side-section:first-child {
-    border-right: 1px solid var(--border);
-  }
+  .side-section { padding: 14px 16px; }
+  .side-section:first-child { border-right: 1px solid var(--border); }
   .side-label {
     font-family: var(--mono);
     font-size: 10px;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--text-muted);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
     gap: 6px;
@@ -247,52 +274,31 @@
     display: inline-block;
     width: 6px; height: 6px;
     border-radius: 50%;
-    background: var(--text-muted);
   }
+  .side-label.front { color: var(--accent); }
   .side-label.front::before { background: var(--accent); }
+  .side-label.back { color: var(--amber); }
   .side-label.back::before { background: var(--amber); }
-
   .readings-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
   }
 
-  /* unit hint */
-  .unit-hint {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text-muted);
-    margin-top: 3px;
-  }
-
-  /* ── PROGRESS BAR ── */
-  .progress-bar {
-    background: var(--surface2);
-    border-radius: 3px;
-    height: 4px;
-    margin-bottom: 24px;
-    overflow: hidden;
-  }
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent2), var(--accent));
-    border-radius: 3px;
-    transition: width 0.4s ease;
-    width: 0%;
-  }
-
-  /* ── ENTRY LIST ── */
+  /* ── ENTRIES LOG ── */
   .entries-section {
-    margin-top: 32px;
+    margin-top: 28px;
     border-top: 1px solid var(--border);
-    padding-top: 24px;
+    padding-top: 20px;
+  }
+  .entries-header {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
   }
   .entry-row {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 8px;
-    padding: 12px 16px;
+    padding: 11px 16px;
     margin-bottom: 8px;
     display: flex;
     align-items: center;
@@ -300,48 +306,29 @@
     font-family: var(--mono);
     font-size: 12px;
     color: var(--text-dim);
+    box-shadow: var(--shadow);
   }
-  .entry-row-left { display: flex; gap: 16px; align-items: center; }
+  .entry-row-left { display: flex; gap: 14px; align-items: center; }
   .entry-tag {
     background: var(--accent-dim);
     color: var(--accent);
-    border: 1px solid rgba(126,200,122,0.2);
+    border: 1px solid rgba(46,125,50,0.2);
     padding: 2px 8px;
     border-radius: 4px;
     font-size: 11px;
+    font-weight: 600;
   }
   .entry-delete {
     background: none;
     border: none;
     color: var(--text-muted);
     cursor: pointer;
-    font-size: 16px;
+    font-size: 15px;
     padding: 2px 6px;
     border-radius: 4px;
     transition: color 0.15s;
   }
   .entry-delete:hover { color: var(--red); }
-
-  /* ── TOAST ── */
-  .toast {
-    position: fixed;
-    bottom: 28px;
-    right: 24px;
-    background: var(--accent);
-    color: #0a1009;
-    font-family: var(--mono);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    padding: 12px 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-    z-index: 999;
-    transform: translateY(80px);
-    opacity: 0;
-    transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
-  }
-  .toast.show { transform: translateY(0); opacity: 1; }
 
   /* ── EMPTY STATE ── */
   .empty-state {
@@ -349,34 +336,49 @@
     padding: 32px;
     color: var(--text-muted);
     font-family: var(--mono);
-    font-size: 13px;
+    font-size: 12px;
+    background: var(--surface);
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
   }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--accent);
+    color: #fff;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-md);
+    z-index: 999;
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast.error { background: var(--red); }
 
   /* ── PRINT ── */
   @media print {
-    body { background: white; color: #111; }
-    .header-actions, .btn, .entry-delete, .progress-bar { display: none !important; }
-    .header { background: white; border-bottom: 2px solid #ccc; position: static; }
-    .header h1 { color: #111; }
-    .logo-dot { background: #4a9e45; box-shadow: none; animation: none; }
-    .meta-card, .env-card, .table-card, .entry-row {
-      background: white; border-color: #ccc; break-inside: avoid;
-    }
-    .table-card-header { background: #f5f5f5; }
-    .field-input, .field-select, .side-section {
-      background: white; color: #111; border-color: #ccc;
-    }
-    .section-tag { background: #e8f5e8; color: #2a6e27; border-color: #b5d6b3; }
-    .table-badge { background: #e8f5e8; color: #2a6e27; }
-    .unit-hint, .field-label, .side-label { color: #777; }
-    .entries-section { display: none; }
+    body { background: white; }
+    .header-actions, .progress-bar, .entry-delete, .entries-section { display: none !important; }
+    .header { position: static; box-shadow: none; border-bottom: 2px solid #ccc; }
+    .card, .table-card, .entry-row { box-shadow: none; break-inside: avoid; }
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 640px) {
+    .main { padding: 16px; }
     .meta-card { grid-template-columns: 1fr 1fr; }
-    .env-card { grid-template-columns: 1fr 1fr; }
+    .env-grid { grid-template-columns: repeat(3, 1fr); }
     .readings-grid { grid-template-columns: 1fr 1fr; }
-    .header h1 { font-size: 12px; }
+    .header h1 { font-size: 11px; }
+    .btn { padding: 7px 10px; font-size: 10px; }
   }
 </style>
 </head>
@@ -390,90 +392,101 @@
   <div class="header-actions">
     <button class="btn btn-ghost" onclick="exportCSV()">↓ CSV</button>
     <button class="btn btn-ghost" onclick="window.print()">⎙ Print</button>
-    <button class="btn btn-primary" onclick="saveEntry()">Save Entry</button>
+    <button class="btn btn-primary" id="saveBtn" onclick="saveEntry()">Save Entry</button>
     <button class="btn btn-danger" onclick="clearForm()">Clear</button>
   </div>
 </div>
 
 <div class="main">
-
   <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
 
   <!-- META -->
-  <div class="meta-card">
-    <div class="field-group">
-      <label class="field-label">Date</label>
-      <input type="date" class="field-input" id="date">
-    </div>
-    <div class="field-group">
-      <label class="field-label">Time</label>
-      <input type="time" class="field-input" id="time">
-    </div>
-    <div class="field-group">
-      <label class="field-label">Room #</label>
-      <div class="select-wrap">
-        <select class="field-select" id="room" onchange="renderTables()">
-          <option value="">— Select —</option>
-          <option>R1</option><option>R2</option><option>R3</option>
-          <option>R4</option><option>R5</option><option>R6</option>
-          <option>R7</option><option>R8</option><option>R9</option>
-          <option>R10</option><option>R11</option>
-        </select>
+  <div class="card">
+    <div class="meta-card">
+      <div class="field-group">
+        <label class="field-label">Date</label>
+        <input type="date" class="field-input" id="date" oninput="updateProgress()">
+      </div>
+      <div class="field-group">
+        <label class="field-label">Time</label>
+        <input type="time" class="field-input" id="time" oninput="updateProgress()">
+      </div>
+      <div class="field-group">
+        <label class="field-label">Room #</label>
+        <div class="select-wrap">
+          <select class="field-select" id="room" onchange="renderTables()">
+            <option value="">— Select —</option>
+            <option>R1</option><option>R2</option><option>R3</option>
+            <option>R4</option><option>R5</option><option>R6</option>
+            <option>R7</option><option>R8</option><option>R9</option>
+            <option>R10</option><option>R11</option>
+          </select>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- ENV -->
-  <div class="section-header">
-    <span class="section-tag">Environment</span>
-    <span class="section-title">Room Conditions</span>
-  </div>
-  <div class="env-card">
-    <div class="field-group">
-      <label class="field-label">Rel. Humidity</label>
-      <input type="number" step="0.1" class="field-input" id="rh" placeholder="—">
-      <div class="unit-hint">%</div>
+  <div class="card">
+    <div class="card-header">
+      <span class="section-tag">Environment</span>
+      <span class="section-title">Room Conditions</span>
     </div>
-    <div class="field-group">
-      <label class="field-label">Room Temp</label>
-      <input type="number" step="0.1" class="field-input" id="room_temp" placeholder="—">
-      <div class="unit-hint">°F</div>
-    </div>
-    <div class="field-group">
-      <label class="field-label">Leaf Surface Temp</label>
-      <input type="number" step="0.1" class="field-input" id="leaf_temp" placeholder="—">
-      <div class="unit-hint">°F</div>
-    </div>
-    <div class="field-group">
-      <label class="field-label">Dewpoint</label>
-      <input type="number" step="0.1" class="field-input" id="dewpoint" placeholder="—">
-      <div class="unit-hint">°F</div>
+    <div class="env-grid">
+      <div class="field-group">
+        <label class="field-label">Rel. Humidity</label>
+        <input type="number" step="0.1" class="field-input" id="rh" placeholder="—" oninput="updateProgress()">
+        <div class="unit-hint">%</div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Room Temp</label>
+        <input type="number" step="0.1" class="field-input" id="room_temp" placeholder="—" oninput="updateProgress()">
+        <div class="unit-hint">°F</div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Leaf Surface Temp</label>
+        <input type="number" step="0.1" class="field-input" id="leaf_temp" placeholder="—" oninput="updateProgress()">
+        <div class="unit-hint">°F</div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Dewpoint</label>
+        <input type="number" step="0.1" class="field-input" id="dewpoint" placeholder="—" oninput="updateProgress()">
+        <div class="unit-hint">°F</div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">PPFD</label>
+        <input type="number" step="1" class="field-input" id="ppfd" placeholder="—" oninput="updateProgress()">
+        <div class="unit-hint">μmol/m²/s</div>
+      </div>
     </div>
   </div>
 
   <!-- TABLES -->
-  <div class="section-header">
-    <span class="section-tag">Runoff</span>
-    <span class="section-title">Table Readings</span>
-  </div>
-  <div id="tables-container">
-    <div class="empty-state">← Select a room above to load tables</div>
+  <div class="card" style="padding: 0; overflow: hidden;">
+    <div class="card-header">
+      <span class="section-tag">Runoff</span>
+      <span class="section-title">Table Readings</span>
+    </div>
+    <div style="padding: 16px;" id="tables-container">
+      <div class="empty-state">Select a room above to load tables</div>
+    </div>
   </div>
 
-  <!-- SAVED ENTRIES -->
+  <!-- ENTRIES LOG -->
   <div class="entries-section" id="entries-section" style="display:none;">
-    <div class="section-header">
+    <div class="entries-header">
       <span class="section-tag">Log</span>
       <span class="section-title">Saved Entries</span>
     </div>
     <div id="entries-list"></div>
   </div>
-
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
+  const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbz7-pRO6encj5j8vP6KlqA6vsWhJIFDrcrnzSwPGfKNZAj42_gLhrP6x265wk6FANaP/exec';
+
   const ROOM_TABLES = {
     R1:2, R2:3, R3:3, R4:3, R5:3,
     R6:2, R7:3, R8:3, R9:2, R10:3, R11:3
@@ -490,7 +503,7 @@
     const room = document.getElementById('room').value;
     const container = document.getElementById('tables-container');
     if (!room) {
-      container.innerHTML = '<div class="empty-state">← Select a room above to load tables</div>';
+      container.innerHTML = '<div class="empty-state">Select a room above to load tables</div>';
       updateProgress();
       return;
     }
@@ -554,7 +567,7 @@
     const room = document.getElementById('room').value;
     if (!room) { document.getElementById('progress').style.width = '0%'; return; }
     const count = ROOM_TABLES[room];
-    const fields = ['date','time','room','rh','room_temp','leaf_temp','dewpoint'];
+    const fields = ['date','time','room','rh','room_temp','leaf_temp','dewpoint','ppfd'];
     for (let t = 1; t <= count; t++) {
       ['front','back'].forEach(s => {
         ['vol','ec','ph'].forEach(f => fields.push(`t${t}_${s}_${f}`));
@@ -565,8 +578,7 @@
       const el = document.getElementById(id);
       if (el && el.value.trim() !== '') filled++;
     });
-    const pct = Math.round((filled / fields.length) * 100);
-    document.getElementById('progress').style.width = pct + '%';
+    document.getElementById('progress').style.width = Math.round((filled / fields.length) * 100) + '%';
   }
 
   function getFormData() {
@@ -582,6 +594,7 @@
       room_temp: document.getElementById('room_temp').value,
       leaf_temp: document.getElementById('leaf_temp').value,
       dewpoint: document.getElementById('dewpoint').value,
+      ppfd: document.getElementById('ppfd').value,
       tables: []
     };
     for (let t = 1; t <= count; t++) {
@@ -602,23 +615,17 @@
     return entry;
   }
 
-  const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbz7-pRO6encj5j8vP6KlqA6vsWhJIFDrcrnzSwPGfKNZAj42_gLhrP6x265wk6FANaP/exec';
-
   async function saveEntry() {
     const entry = getFormData();
-    if (!entry || !entry.room) { showToast('Select a room first'); return; }
+    if (!entry || !entry.room) { showToast('Select a room first', true); return; }
 
-    // Save locally first
     savedEntries.push(entry);
     localStorage.setItem('flowerChecks', JSON.stringify(savedEntries));
     renderEntries();
 
-    // Push to Google Sheets
-    const btn = document.querySelector('.btn-primary');
-    const orig = btn.textContent;
+    const btn = document.getElementById('saveBtn');
     btn.textContent = 'Syncing...';
     btn.disabled = true;
-    btn.style.opacity = '0.7';
 
     try {
       const sends = entry.tables.map(t => {
@@ -626,6 +633,7 @@
           date: entry.date, time: entry.time, room: entry.room,
           rh: entry.rh, room_temp: entry.room_temp,
           leaf_temp: entry.leaf_temp, dewpoint: entry.dewpoint,
+          ppfd: entry.ppfd,
           table: 'Table ' + t.table,
           front_vol: t.front.vol, front_ec: t.front.ec, front_ph: t.front.ph,
           back_vol: t.back.vol, back_ec: t.back.ec, back_ph: t.back.ph
@@ -639,12 +647,10 @@
       await Promise.all(sends);
       showToast('Saved → Google Sheets ✓');
     } catch(err) {
-      showToast('Saved locally — sheet sync failed');
-      console.error(err);
+      showToast('Saved locally — sync failed', true);
     } finally {
-      btn.textContent = orig;
+      btn.textContent = 'Save Entry';
       btn.disabled = false;
-      btn.style.opacity = '1';
     }
   }
 
@@ -665,7 +671,7 @@
           <span class="entry-tag">${e.room}</span>
           <span>${e.date} ${e.time}</span>
           <span style="color:var(--text-muted)">${e.tables.length} table${e.tables.length>1?'s':''}</span>
-          <span style="color:var(--text-muted)">RH ${e.rh||'—'}%  Temp ${e.room_temp||'—'}°F</span>
+          <span style="color:var(--text-muted)">RH ${e.rh||'—'}%  Temp ${e.room_temp||'—'}°F  PPFD ${e.ppfd||'—'}</span>
         </div>
         <button class="entry-delete" onclick="deleteEntry(${e.id})">✕</button>
       </div>
@@ -678,21 +684,22 @@
     document.getElementById('room_temp').value = '';
     document.getElementById('leaf_temp').value = '';
     document.getElementById('dewpoint').value = '';
-    document.getElementById('tables-container').innerHTML = '<div class="empty-state">← Select a room above to load tables</div>';
-    const now = new Date();
-    document.getElementById('date').value = now.toISOString().split('T')[0];
-    document.getElementById('time').value = now.toTimeString().slice(0,5);
+    document.getElementById('ppfd').value = '';
+    document.getElementById('tables-container').innerHTML = '<div class="empty-state">Select a room above to load tables</div>';
+    const n = new Date();
+    document.getElementById('date').value = n.toISOString().split('T')[0];
+    document.getElementById('time').value = n.toTimeString().slice(0,5);
     updateProgress();
     showToast('Form cleared');
   }
 
   function exportCSV() {
-    if (savedEntries.length === 0) { showToast('No saved entries yet'); return; }
-    const rows = [['Date','Time','Room','RH%','Room Temp °F','Leaf Temp °F','Dewpoint °F','Table','Side','Volume mL','EC ppm','pH']];
+    if (savedEntries.length === 0) { showToast('No saved entries yet', true); return; }
+    const rows = [['Date','Time','Room','RH%','Room Temp °F','Leaf Temp °F','Dewpoint °F','PPFD','Table','Front Vol mL','Front EC ppm','Front pH','Back Vol mL','Back EC ppm','Back pH']];
     savedEntries.forEach(e => {
       e.tables.forEach(t => {
-        rows.push([e.date,e.time,e.room,e.rh,e.room_temp,e.leaf_temp,e.dewpoint,t.table,'Front',t.front.vol,t.front.ec,t.front.ph]);
-        rows.push([e.date,e.time,e.room,e.rh,e.room_temp,e.leaf_temp,e.dewpoint,t.table,'Back',t.back.vol,t.back.ec,t.back.ph]);
+        rows.push([e.date,e.time,e.room,e.rh,e.room_temp,e.leaf_temp,e.dewpoint,e.ppfd||'',t.table,'Front',t.front.vol,t.front.ec,t.front.ph]);
+        rows.push([e.date,e.time,e.room,e.rh,e.room_temp,e.leaf_temp,e.dewpoint,e.ppfd||'',t.table,'Back',t.back.vol,t.back.ec,t.back.ph]);
       });
     });
     const csv = rows.map(r => r.map(v => `"${v||''}"`).join(',')).join('\n');
@@ -703,21 +710,16 @@
     showToast('CSV downloaded ✓');
   }
 
-  function showToast(msg) {
+  function showToast(msg, isError) {
     const t = document.getElementById('toast');
     t.textContent = msg;
+    t.className = 'toast' + (isError ? ' error' : '');
     t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 2200);
+    setTimeout(() => t.classList.remove('show'), 2400);
   }
 
-  // Init
   renderEntries();
   updateProgress();
-
-  // Auto-update progress on env fields
-  ['rh','room_temp','leaf_temp','dewpoint'].forEach(id => {
-    document.getElementById(id).addEventListener('input', updateProgress);
-  });
 </script>
 </body>
 </html>
