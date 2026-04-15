@@ -394,15 +394,7 @@ input[id^="rc-"]:focus, select[id^="rc-"] { outline:2px solid var(--green); outl
 <div class="topbar">
   <div class="topbar-brand">WESTSIDE<span> GROWERS</span></div>
   <div class="topbar-date" id="topbar-date"></div>
-  <div class="role-select" id="role-select">
-    <button class="role-btn active" onclick="setRole('lead')" data-role="lead">Lead / Pat</button>
-    <button class="role-btn" onclick="setRole('defoliator')" data-role="defoliator">Defoliator</button>
-    <button class="role-btn" onclick="setRole('fertigator')" data-role="fertigator">Fertigator</button>
-    <button class="role-btn" onclick="setRole('cloner')" data-role="cloner">Cloner</button>
-    <button class="role-btn" onclick="setRole('ipm')" data-role="ipm">IPM</button>
-    <button class="role-btn" onclick="setRole('checker')" data-role="checker">Room Check</button>
-    <button class="role-btn" onclick="setRole('postprod')" data-role="postprod">Post Prod</button>
-  </div>
+  <div class="role-select" id="role-select"></div>
 </div>
 
 <!-- NAV -->
@@ -4597,6 +4589,7 @@ if(team && team.length){
     document.body.classList.add('pre-login');
     showLoginModal();
   }
+  // If session restored, pre-login class is already removed by finishLogin
 }
 try { setRole(currentRole); } catch(e){ console.error('setRole:',e); try{setRole('lead');}catch(e2){} }
 try { renderRooms(); } catch(e){ console.error('renderRooms:',e); }
